@@ -3,7 +3,7 @@ management dashboard for bottled water company
 
 ##  Setup
 ### Back-end
-The back-end portion of the application is a [Django](https://www.djangoproject.com/) project with a [Django REST Framework](https://www.django-rest-framework.org/) app (api). To setup, run and develop the back-end portion of this project you must first setup a python development environment, install the dependencies, then serve the development server.
+The back-end portion of the application is a [Django](https://www.djangoproject.com/) project with a [Django REST Framework](https://www.django-rest-framework.org/) app (api). To setup, run and develop the back-end portion of this project you must first setup a python development environment, install the dependencies, apply migrations, then serve the development server.
 
 Setup your python distribution. It's recommended to use pyenv to manage distributions. The installation steps can be found [here](https://realpython.com/intro-to-pyenv/#why-use-pyenv) . Once you've installed it, select a distribution and proceed.
 
@@ -13,9 +13,9 @@ If you haven't setup a virtual environment for this porject:
 ```sh
 $ pip install virtualenvwrapper
 ...
-$ export WORKON_HOME=~/.venv
+$ export WORKON_HOME=$HOME/.venv
 $ mkdir -p $WORKON_HOME
-$ source /usr/local/bin/virtualenvwrapper.sh
+$ source $(pyenv prefix)/bin/virtualenvwrapper.sh
 $ mkvirtualenv management-dashboard
 ```
 If you've already setup a virtual environment:
@@ -26,7 +26,11 @@ This should put your shell in an isolated virtual environment where you could in
 ```sh
 (management-dashboard)$ pip install -r requirements-dev.txt
 ```
-Now that all requirements are installed, you can start the development server. run the following command in the directory containing the `manage.py` file.
+Now that all requirements are installed, you should apply migrations.
+```sh
+(management-dashboard)$ python manage.py migrate
+```
+Then you can start the development server. run the following command in the directory containing the `manage.py` file.
 ```sh
 (management-dashboard)$ python manage.py runserver
 ```
