@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "$schema": "node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "./src",
+  "sourceRoot": "./frontend",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,11 +11,11 @@
       "options": {
         "compiler": "babel",
         "outputPath": "dist/frontend",
-        "index": "src/index.html",
+        "index": "frontend/index.html",
         "baseHref": "/",
-        "main": "src/main.tsx",
+        "main": "frontend/main.tsx",
         "tsConfig": "tsconfig.app.json",
-        "assets": ["src/favicon.ico", "src/assets"],
+        "assets": ["frontend/favicon.ico", "frontend/assets"],
         "styles": [],
         "scripts": [],
         "webpackConfig": "webpack.config.js"
@@ -30,8 +30,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "src/environments/environment.ts",
-              "with": "src/environments/environment.prod.ts"
+              "replace": "frontend/environments/environment.ts",
+              "with": "frontend/environments/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -64,7 +64,7 @@
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["./src"]
+        "lintFilePatterns": ["./frontend"]
       }
     },
     "test": {

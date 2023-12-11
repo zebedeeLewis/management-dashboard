@@ -12,14 +12,14 @@
   },
   "include": [
     "jest.config.ts",
-    "src/**/*.test.ts",
-    "src/**/*.spec.ts",
-    "src/**/*.test.tsx",
-    "src/**/*.spec.tsx",
-    "src/**/*.test.js",
-    "src/**/*.spec.js",
-    "src/**/*.test.jsx",
-    "src/**/*.spec.jsx",
-    "src/**/*.d.ts"
+    "frontend/**/*.test.ts",
+    "frontend/**/*.spec.ts",
+    "frontend/**/*.test.tsx",
+    "frontend/**/*.spec.tsx",
+    "frontend/**/*.test.js",
+    "frontend/**/*.spec.js",
+    "frontend/**/*.test.jsx",
+    "frontend/**/*.spec.jsx",
+    "frontend/**/*.d.ts"
   ]
 }

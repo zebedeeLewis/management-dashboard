@@ -9,7 +9,7 @@ export default {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: './coverage/frontend',
   testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.[jt]s?(x)',
-    '<rootDir>/src/**/*(*.)@(spec|test).[jt]s?(x)',
+    '<rootDir>/frontend/**/__tests__/**/*.[jt]s?(x)',
+    '<rootDir>/frontend/**/*(*.)@(spec|test).[jt]s?(x)',
   ],
 };
