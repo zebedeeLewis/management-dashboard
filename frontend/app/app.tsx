@@ -1,7 +1,7 @@
 
 export function App() {
   return (
-      <>Hello world</>
+      <div id="hello">Hello world</div>
   )
 }
 

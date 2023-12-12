@@ -1,3 +1,4 @@
+
 #  Management Dashboard
 management dashboard for bottled water company
 
@@ -44,4 +45,10 @@ $ npm install
 Run the development server.
 ```sh
 $ npx nx serve
+```
+##  Tests
+###  End-To-End
+The end-to-end tests are a set of [pytest](https://docs.pytest.org/en/7.4.x/contents.html) [selenium](https://selenium-python.readthedocs.io/index.html) tests. To setup, run and develop the end-to-end tests you must first setup a python development environment, install the dependencies, serve the application, then run the tests. Follow the instructions under "backend setup",  after switching into your virtual environment and installing the test dependencies you need to serve the application. Finally change into the `tests` directory, and run the tests:
+```sh
+(management-dashboard)$ python -m pytest
 ```
