@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Sample
+from app_api.models import Sample
 
 
 class SampleSerializer(serializers.Serializer):

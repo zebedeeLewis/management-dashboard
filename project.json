@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "$schema": "node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "./frontend",
+  "sourceRoot": "./app_frontend",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,12 +10,12 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/frontend",
-        "index": "frontend/index.html",
-        "baseHref": "/",
-        "main": "frontend/main.tsx",
+        "outputPath": "static_build/app",
+        "index": "app_frontend/index.html",
+        "baseHref": "",
+        "main": "app_frontend/main.tsx",
         "tsConfig": "tsconfig.app.json",
-        "assets": ["frontend/favicon.ico", "frontend/assets"],
+        "assets": ["app_frontend/favicon.ico", "app_frontend/assets"],
         "styles": [],
         "scripts": [],
         "webpackConfig": "webpack.config.js"
@@ -30,8 +30,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "frontend/environments/environment.ts",
-              "with": "frontend/environments/environment.prod.ts"
+              "replace": "app_frontend/environments/environment.ts",
+              "with": "app_frontend/environments/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -43,7 +43,7 @@
         }
       }
     },
-    "serve": {
+    "serve-fe": {
       "executor": "@nx/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
@@ -60,11 +60,29 @@
         }
       }
     },
+    "makemigrations":{
+      "command": "python manage.py makemigrations",
+    },
+    "migrate":{
+      "dependsOn": ["makemigrations"],
+      "command": "python manage.py migrate",
+    },
+    "clean":{
+      "command": "rimraf --glob static_root/*",
+    },
+    "collect-static": {
+      "dependsOn": ["clean", "build"],
+      "command": "python manage.py collectstatic",
+    },
+    "serve-be": {
+      "dependsOn": ["migrate", "collect-static"],
+      "command": "python manage.py runserver"
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["./frontend"]
+        "lintFilePatterns": ["./app_frontend"]
       }
     },
     "test": {
@@ -76,7 +94,7 @@
     },
     "docker-build": {
       "dependsOn": ["build"],
-      "command": "docker build -f Dockerfile . -t frontend"
+      "command": "docker build -f Dockerfile . -t dashboard"
     }
   },
   "tags": []

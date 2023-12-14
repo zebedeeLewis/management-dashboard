@@ -1,8 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from api.models import Sample
-from api.serializers import SampleSerializer
+from app_api.models import Sample
+from app_api.serializers import SampleSerializer
 
 @csrf_exempt
 def sample_list(request):

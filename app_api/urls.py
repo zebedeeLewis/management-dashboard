@@ -1,5 +1,5 @@
 from django.urls import path
-from api import views
+from app_api import views
 
 urlpatterns = [
     path('samples/', views.sample_list),
