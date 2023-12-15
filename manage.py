@@ -2,11 +2,16 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parent
+APP_ROOT = PROJECT_ROOT / 'src/app'
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app_root.settings')
+    sys.path.append(str(APP_ROOT))
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project_root.settings')
+    os.environ.setdefault('PROJECT_ROOT', str(PROJECT_ROOT))
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist/out-tsc",
+    "outDir": "./static/build/out-tsc",
     "types": [
       "node",
 
@@ -11,14 +11,14 @@
   },
   "exclude": [
     "jest.config.ts",
-    "app_frontend/**/*.spec.ts",
-    "app_frontend/**/*.test.ts",
-    "app_frontend/**/*.spec.tsx",
-    "app_frontend/**/*.test.tsx",
-    "app_frontend/**/*.spec.js",
-    "app_frontend/**/*.test.js",
-    "app_frontend/**/*.spec.jsx",
-    "app_frontend/**/*.test.jsx"
+    "src/app/webui/**/*.spec.ts",
+    "src/app/webui/**/*.test.ts",
+    "src/app/webui/**/*.spec.tsx",
+    "src/app/webui/**/*.test.tsx",
+    "src/app/webui/**/*.spec.js",
+    "src/app/webui/**/*.test.js",
+    "src/app/webui/**/*.spec.jsx",
+    "src/app/webui/**/*.test.jsx"
   ],
-  "include": ["app_frontend/**/*.js", "app_frontend/**/*.jsx", "app_frontend/**/*.ts", "app_frontend/**/*.tsx"]
+  "include": ["src/app/webui/**/*.js", "src/app/webui/**/*.jsx", "app_frontend/**/*.ts", "src/app/webui/**/*.tsx"]
 }
