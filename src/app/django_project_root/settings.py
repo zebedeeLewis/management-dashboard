@@ -17,7 +17,7 @@ import os
 # PROJECT_ROOT = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = Path(os.environ.get('PROJECT_ROOT'))
 DEVELOPMENT = os.environ.get('DEVELOPMENT')
-PUBLIC_IP = os.environ.get('FLY_PUBLIC_IP')
+PUBLIC_IP = os.environ.get('PUBLIC_IP')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
