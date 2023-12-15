@@ -55,6 +55,7 @@ develop-eggs/
 dist/ 
 static_build/
 static_root/
+static/
 downloads/ 
 eggs/ 
 .eggs/ 
