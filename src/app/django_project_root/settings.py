@@ -16,24 +16,28 @@ import os
 # Build paths inside the project like this: PROJECT_ROOT / 'subdir'.
 # PROJECT_ROOT = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = Path(os.environ.get('PROJECT_ROOT'))
-
+DEVELOPMENT = os.environ.get('DEVELOPMENT')
+PUBLIC_IP = os.environ.get('FLY_PUBLIC_IP')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-em__^p$zy2@mo8!uu0^2cnrx3f=_(gzcs9tjxp^0_01#+dm=np'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = [
-    '*',
-]
+if DEVELOPMENT == 'development':
+    DEBUG = False
+    ALLOWED_HOSTS = [PUBLIC_IP]
+    SECRET_KEY = 'django-insecure-em__^p$zy2@mo8!uu0^2cnrx3f=_(gzcs9tjxp^0_01#+dm=np'
+else:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
+    DEBUG = False
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
