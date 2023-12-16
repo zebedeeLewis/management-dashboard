@@ -13,17 +13,11 @@ RUN npx nx build
 #############################
 FROM python:3 as stage-two
 
-ARG public_ip='0.0.0.0'
-ARG secret_key=''
 ARG development=''
+EXPOSE 80
 
-ENV PUBLIC_IP=$public_ip
-ENV SECRET_KEY=$secret_key
-ENV PORT=80
-ENV GUNICORN_CMD_ARGS="--bind=${PUBLIC_IP}:${PORT} --workers=3"
+ENV GUNICORN_CMD_ARGS="--bind=0.0.0.0:80 --workers=3"
 ENV DEVELOPMENT=$development
-
-EXPOSE ${PORT}
 
 WORKDIR /usr/src/app
 
