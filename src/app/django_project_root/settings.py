@@ -26,8 +26,8 @@ PUBLIC_IP = os.environ.get('PUBLIC_IP')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 if DEVELOPMENT == 'development':
-    DEBUG = False
-    ALLOWED_HOSTS = [PUBLIC_IP]
+    DEBUG = True
+    ALLOWED_HOSTS = []
     SECRET_KEY = 'django-insecure-em__^p$zy2@mo8!uu0^2cnrx3f=_(gzcs9tjxp^0_01#+dm=np'
 else:
     CSRF_COOKIE_SECURE = True
@@ -35,7 +35,7 @@ else:
 
     DEBUG = False
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = [PUBLIC_IP]
 
 # Application definition
 INSTALLED_APPS = [
@@ -129,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://example.com/media/'
 
 STATIC_ROOT = PROJECT_ROOT / "static/root"
 

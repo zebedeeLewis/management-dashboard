@@ -8,9 +8,13 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 """
 
 import os
+from pathlib import Path
 
 from django.core.wsgi import get_wsgi_application
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+os.environ.setdefault('PROJECT_ROOT', str(PROJECT_ROOT))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project_root.settings')
 
 application = get_wsgi_application()

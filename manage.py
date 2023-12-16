@@ -12,6 +12,7 @@ def main():
     sys.path.append(str(APP_ROOT))
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project_root.settings')
     os.environ.setdefault('PROJECT_ROOT', str(PROJECT_ROOT))
+    os.environ.setdefault('DEVELOPMENT', 'development')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
