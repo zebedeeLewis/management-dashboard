@@ -126,15 +126,15 @@ management dashboard for bottled water company
      $ npx nx build
      ```
      this will build the front-end app and place the artifacts in
-     '<project root>/static/build'.
-  3. copy the '<project root>/src/app/api' directory to a new 'app root'
+     '[project root]/static/build'.
+  3. copy the '[project root]/src/app/api' directory to a new 'app root'
     ```sh
-    $ cp -r src/app/api <deploy root>/
+    $ cp -r src/app/api [deploy root]/
     ```
-  4. copy the '<project root>/src/app/djang_project_root' directory to new
+  4. copy the '[project root]/src/app/djang_project_root' directory to new
      'app root'
      ```sh
-    $ cp -r src/app/django_project_root <deploy root>/
+    $ cp -r src/app/django_project_root [deploy root]/
      ```
   2. install backend dependencies
     ```sh
