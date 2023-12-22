@@ -1,7 +1,6 @@
 FROM node as stage-one
 
 ENV NX_REJECT_UNKNOWN_LOCAL_CACHE=0 
-
 WORKDIR /home/node/stage-one
 
 COPY . .
@@ -9,8 +8,6 @@ COPY . .
 RUN npm install
 RUN npx nx build
 
-
-#############################
 FROM python:3 as stage-two
 
 ARG development=''
