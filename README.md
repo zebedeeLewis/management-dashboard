@@ -128,27 +128,27 @@ management dashboard for bottled water company
      this will build the front-end app and place the artifacts in
      '[project root]/static/build'.
   3. copy the '[project root]/src/app/api' directory to a new 'app root'.
-    ```sh
-    $ cp -r src/app/api [deploy root]/
-    ```
+   ```sh
+  $ cp -r src/app/api [deploy root]/
+  ```
   4. copy the '[project root]/src/app/djang_project_root' directory to new
      'app root'
-     ```sh
-    $ cp -r src/app/django_project_root [deploy root]/
-     ```
-  2. install backend dependencies
-    ```sh
-    (management-dashboard)$ pip install -r requirements-prod.txt
-    ```
+   ```sh
+  $ cp -r src/app/django_project_root [deploy root]/
+  ```
+  5. install backend dependencies
+   ```sh
+  (management-dashboard)$ pip install -r requirements-prod.txt
+  ```
   6. collect static files
-    ```sh
-    (management-dashboard)$ npx nx collect-static
-    ```
+   ```sh
+  (management-dashboard)$ npx nx collect-static
+  ```
   7. make and apply migrations
-    ```sh
-    (management-dashboard)$ npx nx makemigrations
-    (management-dashboard)$ npx nx migrate
-    ```
+   ```sh
+  (management-dashboard)$ npx nx makemigrations
+  (management-dashboard)$ npx nx migrate
+  ```
   The app is now ready to be deployed using your prefered server. You can
   use gunicorn to serve the app by running the following command from the
   deployment root directory.
@@ -162,8 +162,9 @@ management dashboard for bottled water company
   makes and apply migrations and runs a gunicorn server that listends on
   port 80. To build the docker image run the following command:
   ```sh
-  $ docker build -f Dockerfile --build-arg="development=development" \
-    --target=stage-two -t dashboard .
+  $ docker build -f Dockerfile \
+  --build-arg="development=development" \
+  --target=stage-two -t dashboard .
   ```
   This will build the image with the `DEVELOPMENT` environment variable
   set to 'development'. To run the image:
