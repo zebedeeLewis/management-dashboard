@@ -127,7 +127,7 @@ management dashboard for bottled water company
      ```
      this will build the front-end app and place the artifacts in
      '[project root]/static/build'.
-  3. copy the '[project root]/src/app/api' directory to a new 'app root'
+  3. copy the '[project root]/src/app/api' directory to a new 'app root'.
     ```sh
     $ cp -r src/app/api [deploy root]/
     ```
