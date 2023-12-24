@@ -1,11 +1,11 @@
 import pytest
 from selenium import webdriver
-from pages.sample import SamplePage
+from integrations.pages.sample import SamplePage
 
 @pytest.fixture
 def driver():
     driver = webdriver.Chrome()
-    url = 'http://localhost:4200/'
+    url = 'http://localhost:8000/app'
     driver.get(url)
     driver.maximize_window()
     yield driver

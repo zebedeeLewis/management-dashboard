@@ -32,3 +32,4 @@ soupsieve==2.5
 waitress==2.1.2
 WebOb==1.8.7
 WebTest==3.0.0
+pytest-env==1.1.3
