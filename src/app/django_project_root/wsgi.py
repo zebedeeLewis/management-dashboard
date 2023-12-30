@@ -9,12 +9,11 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 
 import os
 from pathlib import Path
-
 from django.core.wsgi import get_wsgi_application
+from dotenv import load_dotenv
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
-os.environ.setdefault('PROJECT_ROOT', str(PROJECT_ROOT))
+load_dotenv()
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project_root.settings')
+os.environ.setdefault('PROJECT_DIR', str(Path(__file__).resolve().parent.parent))
 
 application = get_wsgi_application()

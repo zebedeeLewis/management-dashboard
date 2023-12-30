@@ -10,14 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 
-# Build paths inside the project like this: PROJECT_ROOT / 'subdir'.
-# PROJECT_ROOT = Path(__file__).resolve().parent.parent
-PROJECT_ROOT = Path(os.environ.get('PROJECT_ROOT'))
-DEVELOPMENT = os.environ.get('DEVELOPMENT')
-APP_HOST = str(os.environ.get('FLY_APP_NAME')) + '.fly.dev'
+# Build paths inside the project like this: PROJECT_DIR / 'subdir'.
+# PROJECT_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = Path(os.environ.get('PROJECT_DIR'))
+RUN_MODE = os.environ.get('RUN_MODE')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -25,17 +24,17 @@ APP_HOST = str(os.environ.get('FLY_APP_NAME')) + '.fly.dev'
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECURITY WARNING: don't run with debug turned on in production!
 
-if DEVELOPMENT == 'development':
-    DEBUG = True
-    ALLOWED_HOSTS = []
-    SECRET_KEY = 'django-insecure-em__^p$zy2@mo8!uu0^2cnrx3f=_(gzcs9tjxp^0_01#+dm=np'
-else:
+
+DEBUG = True
+ALLOWED_HOSTS = []
+SECRET_KEY = 'django-insecure-em__^p$zy2@mo8!uu0^2cnrx3f=_(gzcs9tjxp^0_01#+dm=np'
+
+if RUN_MODE != 'development':
+    DEBUG = False
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
-
-    DEBUG = False
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    ALLOWED_HOSTS = [APP_HOST]
+    ALLOWED_HOSTS = [os.environ.get('HOST')]
 
 # Application definition
 INSTALLED_APPS = [
@@ -88,7 +87,7 @@ WSGI_APPLICATION = 'django_project_root.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': PROJECT_ROOT / 'db.sqlite3',
+        'NAME': PROJECT_DIR / 'db.sqlite3',
     }
 }
 
@@ -131,9 +130,9 @@ STATIC_URL = '/'
 
 MEDIA_URL = 'https://example.com/media/'
 
-STATIC_ROOT = PROJECT_ROOT / "static/root"
+STATIC_ROOT = PROJECT_DIR / "static/root"
 
-STATICFILES_DIRS = [PROJECT_ROOT / "static/build"]
+STATICFILES_DIRS = [PROJECT_DIR / "static/build"]
 
 WHITENOISE_INDEX_FILE = True
 

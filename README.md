@@ -89,22 +89,22 @@ management dashboard for bottled water company
   In addition to the environment variables defined by the python system and
   the Django framework, This app makes use of the following additional
   environment variables:
-  1. `DEVELOPMENT`: used to determine whether the app is in development,
+  1. `RUN_MODE`: used to determine whether the app is in development,
      testing, or production mode. Accepted values are `development`,
      `production` or `testing`.
-  2. `PROJECT_ROOT`: the path to the projects root directory.
-  3. `FLY_APP_NAME`: this is a value set by the fly.io server. This is
+  3. `HOST`: this is a value set by the fly.io server. This is
      only used in production mode.
   4. `SECRET_KEY`: the django secret key
+  5. `PORT`: the port on which the app is listening.
 
-  When the `DEVELOPMENT` environment variable is set to 'development', the
+  When the `RUN_MODE` environment variable is set to 'development', the
   following takes place in `settings.py`:
   1. `SECRET_KEY` is set to a rondom hardcoded value just to ensure that the
      key is not empty (which would cause an error).
   2. `ALLOWED_HOSTS` is set to an empty list.
   3. `DEBUG` is set to `True`.
 
-  When `DEVELOPMENT` environment variable is set to 'production', the
+  When `RUN_MODE` environment variable is set to 'production', the
   following takes place in `settings.py`:
   1. `SECRET_KEY` is set to the value of the `SECRET_KEY` environment
      variable. Note that if the environment variable is not set the app will
@@ -163,7 +163,7 @@ management dashboard for bottled water company
   port 80. To build the docker image run the following command:
   ```sh
   $ docker build -f Dockerfile \
-  --build-arg="development=development" \
+  --build-arg="run_mode=development" \
   --target=stage-two -t dashboard .
   ```
   This will build the image with the `DEVELOPMENT` environment variable

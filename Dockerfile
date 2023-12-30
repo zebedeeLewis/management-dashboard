@@ -10,11 +10,11 @@ RUN npx nx build
 
 FROM python:3 as stage-two
 
-ARG development=''
+ARG run_mode=''
 EXPOSE 80
 
 ENV GUNICORN_CMD_ARGS="--bind=0.0.0.0:80 --workers=3"
-ENV DEVELOPMENT=$development
+ENV RUN_MODE=$run_mode
 
 WORKDIR /usr/src/app
 
