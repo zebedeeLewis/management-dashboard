@@ -8,6 +8,7 @@ primary_region = "mia"
 
 [env]
   PORT=80
+  HOST="management-dashboard-little-frost-5784.fly.dev"
 
 [http_service]
   internal_port = 80

@@ -61,22 +61,22 @@
       }
     },
     "makemigrations":{
-      "command": "python manage.py makemigrations",
+      "command": "python src/app/django_project_root/manage.py runserver"
     },
     "migrate":{
       "dependsOn": ["makemigrations"],
-      "command": "python manage.py migrate",
+      "command": "python src/app/django_project_root/manage.py runserver"
     },
     "clean":{
       "command": "rimraf --glob static/root/*",
     },
     "collect-static": {
       "dependsOn": ["clean", "build"],
-      "command": "python manage.py collectstatic",
+      "command": "python src/app/django_project_root/manage.py runserver"
     },
     "serve-be": {
       "dependsOn": ["migrate", "collect-static"],
-      "command": "python manage.py runserver"
+      "command": "python src/app/django_project_root/manage.py runserver"
     },
     "lint": {
       "executor": "@nx/eslint:lint",
