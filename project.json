@@ -43,6 +43,12 @@
         }
       }
     },
+    "e2e":{
+      "command": "pytest src/app/integrations/e2e"
+    },
+    "features":{
+      "command": "behave src/app/integrations/features"
+    },
     "serve-fe": {
       "executor": "@nx/webpack:dev-server",
       "defaultConfiguration": "development",
