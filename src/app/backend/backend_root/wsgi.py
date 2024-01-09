@@ -14,6 +14,7 @@ from django.core.wsgi import get_wsgi_application
 from dotenv import load_dotenv
 
 APPS_DIR = Path(__file__).resolve().parent.parent.parent
+LIBS_DIR = APPS_DIR.parent / 'libs'
 PROJECT_DIR = APPS_DIR.parent.parent
 
 load_dotenv()
