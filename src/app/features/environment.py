@@ -5,7 +5,11 @@ from selenium import webdriver
 from dotenv import load_dotenv
 
 load_dotenv()
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+SRC_DIR = Path(__file__).resolve().parent.parent.parent
+LIBS_DIR = SRC_DIR / 'libs'
+
+sys.path.append(str(LIBS_DIR))
 
 def before_scenario(context, scenario):
     context.driver = webdriver.Chrome()

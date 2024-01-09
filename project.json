@@ -44,10 +44,10 @@
       }
     },
     "e2e":{
-      "command": "pytest src/app/integrations/e2e"
+      "command": "pytest src/app/e2e"
     },
     "features":{
-      "command": "behave src/app/integrations/features"
+      "command": "behave src/app/features"
     },
     "serve-fe": {
       "executor": "@nx/webpack:dev-server",
@@ -67,22 +67,22 @@
       }
     },
     "makemigrations":{
-      "command": "python src/app/django_project_root/manage.py runserver"
+      "command": "python src/app/backend/manage.py makemigrations"
     },
     "migrate":{
       "dependsOn": ["makemigrations"],
-      "command": "python src/app/django_project_root/manage.py runserver"
+      "command": "python src/app/backend/manage.py runserver"
     },
     "clean":{
       "command": "rimraf --glob static/root/*",
     },
     "collect-static": {
       "dependsOn": ["clean", "build"],
-      "command": "python src/app/django_project_root/manage.py runserver"
+      "command": "python src/app/backend/manage.py runserver"
     },
     "serve-be": {
       "dependsOn": ["migrate", "collect-static"],
-      "command": "python src/app/django_project_root/manage.py runserver"
+      "command": "python src/app/backend/manage.py runserver"
     },
     "lint": {
       "executor": "@nx/eslint:lint",
