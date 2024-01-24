@@ -2,172 +2,317 @@
 management dashboard for bottled water company
 
 ##  Setup
-  This project uses [nx](https://nx.dev/) to manage project tasks. While nx
-  itself is not a prerequisite (it is however, a dev-dependency), node and
-  npm are. It's recommended to use node version manager such as
-  [nvm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm)
-  to manage node and npm versions. Installation and usage information can be
-  found [here](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating).
+This project uses [nx](https://nx.dev/) to manage project tasks. While nx
+itself is not a prerequisite (it is however, a dev-dependency), node and
+npm are. It's recommended to use node version manager such as
+[nvm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm)
+to manage node and npm versions. Installation and usage information can be
+found [here](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating).
 
-  The back-end is a [Django](https://www.djangoproject.com/) project with a
-  [Django REST Framework](https://www.django-rest-framework.org/) api app.
-  Again, Django and django-rest-framework are not prerequisite, but python
-  is. It is recommended to use pyenv to manage python versions. Installation
-  instructions can be found [here](https://realpython.com/intro-to-pyenv/#why-use-pyenv). 
+The back-end is a [Django](https://www.djangoproject.com/) project with a
+[Django REST Framework](https://www.django-rest-framework.org/) api app.
+Again, Django and django-rest-framework are not prerequisite, but python
+is. It is recommended to use pyenv to manage python versions. Installation
+instructions can be found [here](https://realpython.com/intro-to-pyenv/#why-use-pyenv). 
 
-  It is also recommended to use a virtual environment to isolate python
-  package versions,
-  [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
-  provides a great set of tools for setting up and managing virtual
-  environments.
+It is also recommended to use a virtual environment to isolate python
+package versions,
+[virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
+provides a great set of tools for setting up and managing virtual
+environments.
 
 ### Frontend
-  Follow the instructions above to set up a Node/JavaScript development
-  environment. Then install the node dependencies **(make sure you are in
-  the directory containing the `package.json` file)**.
-  ```sh
-  $ npm install
-  ```
-  Running a frontend development server is very simple, simply type the
-  following in a terminal:
-  ```sh
-  $ npx nx run serve-fe
-  ```
-  This will spin up a development server for the front-end app. This will
-  not start a server for the back-end app (see the next section).
+Follow the instructions above to set up a Node/JavaScript development
+environment. Then install the node dependencies **(make sure you are in
+the directory containing the `package.json` file)**.
+```sh
+$ npm install
+```
+Running a frontend development server is very simple. Type the following in
+a terminal:
+```sh
+$ npx nx run serve-fe
+```
+This will spin up a development server for the front-end app. This will
+not start a server for the back-end app (see the next section).
 
 ### Backend
-  Follow the instructions above to set up a python development environment.
-  Then create a new virtual environment:
-  ```sh
-  $ mkvirtualenv management-dashboard
-  ```
-  You can exit the virtual environment by typing the following into the
-  shell:
-  ```sh
-  $ deactivate
-  ```
-  To re-enter the virtual environment, type:
-  ```sh
-  $ workon management-dashboard
-  ```
-  Once in a fresh virtual environment, install project dependencies.
-  Dependencies are divided into three requirements file
-  `requirements-prod.txt`, `requirements-tests.txt` and
-  `requirements-dev.txt`. Each subsequent file builds on the requirements
-  in the preceding file.
-  ```sh
-  (management-dashboard)$ pip install -r requirements-dev.txt
-  ```
-  To serve the back-end app, a node development environment must be present
-  and the JavaScript dependencies must be installed (see instructions above).
-  ```sh
-  (management-dashboard)$ npx nx run serve-be
-  ```
-  This will build the front-end app, place the files in a place where the
-  django server can find them, make and run migrations, then spin up a
-  development server. After some setup, the app can be viewed by visiting
-  `127.0.0.1:8000/app`  and `127.0.0.1:8000/api`.
+Follow the instructions above to set up a python development environment.
+Then create a new virtual environment:
+```sh
+$ mkvirtualenv management-dashboard
+```
+You can exit the virtual environment by typing the following into the
+shell:
+```sh
+$ deactivate
+```
+To re-enter the virtual environment, type:
+```sh
+$ workon management-dashboard
+```
+Once in a fresh virtual environment, install project dependencies.
+Dependencies are divided into three requirements file
+`requirements-prod.txt`, `requirements-tests.txt` and
+`requirements-dev.txt`. Each subsequent file builds on the requirements
+in the preceding file.
+```sh
+(management-dashboard)$ pip install -r requirements-dev.txt
+```
+To serve the back-end app, a node development environment must be present
+and the JavaScript dependencies must be installed (see instructions above).
+```sh
+(management-dashboard)$ npx nx run serve-be
+```
+This will build the front-end app, place the files in a place where the
+django server can find them, make and run migrations, then spin up a
+development server. After some setup, the app can be viewed by visiting
+`127.0.0.1:8000/app`  and `127.0.0.1:8000/api`.
 
 ##  Tests
 ###  End-To-End
-  The end-to-end tests are a set of
-  [pytest](https://docs.pytest.org/en/7.4.x/contents.html)
-  [selenium](https://selenium-python.readthedocs.io/index.html) tests. To
-  setup, run and develop the end-to-end tests you must first setup a python
-  development environment, install the dependencies, serve the application,
-  then run the tests. Follow the instructions under "backend setup",  after
-  switching into your virtual environment and installing the test
-  dependencies you need to serve the application. Finally change into the
-  `tests` directory, and run the tests:
-  ```sh
-  (management-dashboard)$ python -m pytest
-  ```
+The end-to-end tests are a set of
+[pytest](https://docs.pytest.org/en/7.4.x/contents.html)
+[selenium](https://selenium-python.readthedocs.io/index.html) tests. To
+setup, run and develop the end-to-end tests you must first setup a python
+development environment, install the dependencies, serve the application,
+then run the tests. Follow the instructions under "backend setup",  after
+switching into your virtual environment and installing the test
+dependencies you need to serve the application. The test application expects
+the app to be served at `localhost` on port `7000` by default. The expected
+app address can be changed by setting the `APP_SERVER` environment variable,
+and the port can be changed by setting `APP_PORT`.
+
+To run end-to-end tests, run the following command from the project root
+directory:
+```sh
+(management-dashboard)$ npx nx run e2e
+```
+
+To run feature tests, run the following command from the project root
+directory:
+```sh
+(management-dashboard)$ npx nx run features
+```
 
 ## App Deployment
 ### Environment
-  In addition to the environment variables defined by the python system and
-  the Django framework, This app makes use of the following additional
-  environment variables:
-  1. `RUN_MODE`: used to determine whether the app is in development,
-     testing, or production mode. Accepted values are `development`,
-     `production` or `testing`.
-  3. `HOST`: this is a value set by the fly.io server. This is
-     only used in production mode.
-  4. `SECRET_KEY`: the django secret key
-  5. `PORT`: the port on which the app is listening.
+In addition to the environment variables defined by the python system and
+the Django framework, This app makes use of the following additional
+environment variables:
+1. `RUN_MODE`: used to determine whether the app is in development,
+   testing, or production mode. Accepted values are `development`,
+   `production` or `testing`.
+3. `HOST`: this is a value set by the fly.io server. This is
+   only used in production mode.
+4. `SECRET_KEY`: the django secret key
+5. `APP_PORT`: the port on which the app is listening.
+6. `PROJECT_DIR`: the root directory of the project.
 
-  When the `RUN_MODE` environment variable is set to 'development', the
-  following takes place in `settings.py`:
-  1. `SECRET_KEY` is set to a rondom hardcoded value just to ensure that the
-     key is not empty (which would cause an error).
-  2. `ALLOWED_HOSTS` is set to an empty list.
-  3. `DEBUG` is set to `True`.
+When the `RUN_MODE` environment variable is set to 'development', the
+following takes place in `settings.py`:
+1. `SECRET_KEY` is set to a rondom hardcoded value just to ensure that the
+   key is not empty (which would cause an error).
+2. `ALLOWED_HOSTS` is set to an empty list.
+3. `DEBUG` is set to `True`.
 
-  When `RUN_MODE` environment variable is set to 'production', the
-  following takes place in `settings.py`:
-  1. `SECRET_KEY` is set to the value of the `SECRET_KEY` environment
-     variable. Note that if the environment variable is not set the app will
-     not work.
-  2. `ALLOWED_HOSTS` value in `settings.py` is set to a list containing the
-     domain name of the app server. Note that if the `FLY_APP_NAME`
-     environment variable is unset the app will not work.
-  3. `DEBUG` is set to `False`.
-  4. `CSRF_COOKIE_SECURE` and `SESSION_COOKIE_SECURE` are set to `True`.
+When `RUN_MODE` environment variable is set to 'production', the
+following takes place in `settings.py`:
+1. `SECRET_KEY` is set to the value of the `SECRET_KEY` environment
+   variable. Note that if the environment variable is not set the app will
+   not work.
+2. `ALLOWED_HOSTS` value in `settings.py` is set to a list containing the
+   domain name of the app server. Note that if the `FLY_APP_NAME`
+   environment variable is unset the app will not work.
+3. `DEBUG` is set to `False`.
+4. `CSRF_COOKIE_SECURE` and `SESSION_COOKIE_SECURE` are set to `True`.
 
 ### Deployment Process
-  To deploy this app:
-  1. install the front-end dependencies
-     ```sh
-     $ npm install
-     ```
-  2. build the front-end app
-     ```sh
-     $ npx nx build
-     ```
-     this will build the front-end app and place the artifacts in
-     '[project root]/static/build'.
-  3. copy the '[project root]/src/app/api' directory to a new 'app root'.
+To deploy this app:
+1. install the front-end dependencies
    ```sh
-  $ cp -r src/app/api [deploy root]/
-  ```
-  4. copy the '[project root]/src/app/djang_project_root' directory to new
-     'app root'
+   $ npm install
+   ```
+2. build the front-end app
    ```sh
-  $ cp -r src/app/django_project_root [deploy root]/
-  ```
-  5. install backend dependencies
-   ```sh
-  (management-dashboard)$ pip install -r requirements-prod.txt
-  ```
-  6. collect static files
-   ```sh
-  (management-dashboard)$ npx nx collect-static
-  ```
-  7. make and apply migrations
-   ```sh
-  (management-dashboard)$ npx nx makemigrations
-  (management-dashboard)$ npx nx migrate
-  ```
-  The app is now ready to be deployed using your prefered server. You can
-  use gunicorn to serve the app by running the following command from the
-  deployment root directory.
-  ```sh
-  (management-dashboard)$ gunicorn django_project_root.wsgi
-  ```
+   $ npx nx build
+   ```
+   this will build the front-end app and place the artifacts in
+   '[project root]/static/build'.
+3. copy the '[project root]/src/app/api' directory to a new 'app root'.
+ ```sh
+$ cp -r src/app/api [deploy root]/
+```
+4. copy the '[project root]/src/app/djang_project_root' directory to new
+   'app root'
+ ```sh
+$ cp -r src/app/django_project_root [deploy root]/
+```
+5. install backend dependencies
+ ```sh
+(management-dashboard)$ pip install -r requirements-prod.txt
+```
+6. collect static files
+ ```sh
+(management-dashboard)$ npx nx collect-static
+```
+7. make and apply migrations
+ ```sh
+(management-dashboard)$ npx nx makemigrations
+(management-dashboard)$ npx nx migrate
+```
+The app is now ready to be deployed using your prefered server. You can
+use gunicorn to serve the app by running the following command from the
+deployment root directory.
+```sh
+(management-dashboard)$ gunicorn django_project_root.wsgi
+```
 ### Docker
-  The deployment process above is encoded into a two-stage docker build.
-  The first stage sets up and builds the front-end app. The second stage
-  copies files needed to run the app into the appropriate directories,
-  makes and apply migrations and runs a gunicorn server that listends on
-  port 80. To build the docker image run the following command:
-  ```sh
-  $ docker build -f Dockerfile \
-  --build-arg="run_mode=development" \
-  --target=stage-two -t dashboard .
-  ```
-  This will build the image with the `DEVELOPMENT` environment variable
-  set to 'development'. To run the image:
-  ```sh
-  $ docker run -p 8080:80 --name="dashboard-i" -itd dashboard
-  ```
+The deployment process above is encoded into a two-stage docker build.
+The first stage sets up and builds the front-end app. The second stage
+copies files needed to run the app into the appropriate directories,
+makes and apply migrations and runs a gunicorn server that listends on
+port 80. To build the docker image run the following command:
+```sh
+$ docker build -f Dockerfile \
+--build-arg="run_mode=development" \
+--target=stage-two -t dashboard .
+```
+This will build the image with the `RUN_MODE` environment variable
+set to 'development'. To run the image:
+```sh
+$ docker run -p 8080:80 --name="dashboard-i" -itd dashboard
+```
+
+## Test App Deployment
+The integration tests makes use of `behave` for feature tests and `pytest`
+for end-to-end tests. They also use `selenium` to automate browser testing.
+Developers can run tests locally from their machine using a local webdriver
+instance, or use docker compose to spin up a set of selenium grid containers.
+If the `WEBDRIVER_SERVER` environment variable is a non-empty string, the
+value will be used as the address of the remote webdriver. Otherwise, it is
+assumed that a local driver is intended. **Note: make sure to set up a
+virtual environment to protect your system if using your development machine,
+instead of a docker image.**
+
+### Environment
+The following environment variables are relevant to the test app:
+1. `APP_SERVER`: the address of a deployed app to execute tests on.
+   This defaults to `localhost`.
+2. `APP_PORT`: the port on which to find the app to execute tests on.
+   Defaults to `7000`.
+3. `WEBDRIVER_SERVER`: the web address (including port) of a remote selenium
+   webdriver or and empty string. Defaults to an empty string.
+
+### Run Tests On Dev Machine Using Local Webdriver
+After downloading the project repository, change into the project root
+directory and follow the steps below to run tests using a local webdriver
+instance.
+1. Create and activate a new virtual environment.
+```sh
+mkvirtualenv tests
+```
+2. Install dependencies into new virtual environment.
+```sh
+npm install
+pip install -r requirments-dev.txt
+```
+or
+```sh
+npm install
+pip install -r requirments-tests.txt
+```
+3. Set the `APP_SERVER` environment variable to identify the server running
+the webapp.
+
+If tests will be ran over a remote web app instance:
+```sh
+export APP_SERVER='management-dashboard-little-frost-5784.fly.dev'
+```
+of if tests will be ran over a local webapp instance:
+```sh
+unset APP_SERVER
+```
+4. set the `APP_PORT` environment variable to identify where the webapp
+is listening on the server.
+```sh
+export APP_PORT=8080
+```
+5. (optional) deploy a local instance of the web app.
+```sh
+npx nx run serve-be
+```
+Notice that when deploying a local instance of the web app it may be necessary
+to open a new terminal (unless you run the above command in the background).
+In this case, make sure the virtual environment is activated and the environment
+variables are set in the new shell
+
+6. unset `WEBDRIVER_SERVER` environment variable to enable using
+a local webdriver instance.
+```sh
+unset WEBDRIVER_SERVER
+```
+7. run tests.
+End-to-end tests:
+```sh
+npx nx run e2e
+```
+Feature tests:
+```sh
+npx nx run features
+```
+
+### Run Tests On Dev Machine Using Selenium Grid
+After downloading the project repository, change into the project root
+directory and follow the steps below to run tests using selenium grid.
+
+1. Follow steps 1-4 above.
+2. create docker network `se-grid-net`.
+```sh
+docker network create --subnet 172.18.0.0/16 \
+--gateway 172.18.0.1 se-grid-net
+```
+3. Run a selenium hub container with with ip `172.18.0.12`.
+```sh
+docker run -d -p 4442-4444:4442-4444 --name se-hub \
+--net se-grid-net --ip 172.18.0.12 selenium/hub:latest
+```
+
+4. Run one or more selenium nodes connected to the same network with
+the hub container created above configured as their hub.
+```sh
+docker run --shm-size="2g" -d --net se-grid-net --name se-chrome \
+-e SE_EVENT_BUS_HOST=se-hub \
+-e SE_EVENT_BUS_PUBLISH_PORT=4442 \
+-e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
+selenium/node-chrome:latest
+
+docker run --shm-size="2g" -d --net se-grid-net --name se-firefox \
+-e SE_EVENT_BUS_HOST=se-hub \
+-e SE_EVENT_BUS_PUBLISH_PORT=4442 \
+-e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
+selenium/node-firefox:latest
+
+docker run --shm-size="2g" -d --net se-grid-net --name se-edge \
+-e SE_EVENT_BUS_HOST=se-hub \
+-e SE_EVENT_BUS_PUBLISH_PORT=4442 \
+-e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
+selenium/node-edge:latest
+```
+
+5. Set `WEBDRIVER_SERVER` environment variable to enable selenium
+grid in tests using the selenium hub container created in step 3.
+
+```sh
+export WEBDRIVER_SERVER=172.18.0.12
+```
+
+6. Run tests.
+End-to-end tests:
+```sh
+npx nx run e2e
+```
+Feature tests:
+```sh
+npx nx run features
+```

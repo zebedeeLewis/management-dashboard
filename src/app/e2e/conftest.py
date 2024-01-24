@@ -1,20 +1,42 @@
 import os
 import pytest
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
+
 from integrations.pages.sample import SamplePage
 
-PORT = os.environ.get('PORT') or 7000
-TEST_APP = os.environ.get('TEST_APP') or (
-        'http://localhost:' + str(PORT) + '/')
+APP_PORT = os.environ.get('APP_PORT') or 7000
+APP_SERVER = os.environ.get('APP_SERVER') or 'localhost'
+TEST_APP_ADDRESS = 'http://' + APP_SERVER + ':' + str(APP_PORT) + '/app'
+
+WEBDRIVER_SERVER = os.environ.get('WEBDRIVER_SERVER') or ''
+SELENIUM_HUB = 'http://' + WEBDRIVER_SERVER + ':4444/wd/hub'
 
 @pytest.fixture
 def driver():
-    driver = webdriver.Chrome()
-    url = TEST_APP
+
+    if WEBDRIVER_SERVER == '':
+        driver = webdriver.Chrome()
+    else:
+        # options = FirefoxOptions()
+        # options = EdgeOptions()
+        options = ChromeOptions()
+
+        options.add_argument('--ignore-ssl-errors=yes')
+        options.add_argument('--ignore-certificate-errors')
+
+        driver = webdriver.Remote(
+                command_executor=SELENIUM_HUB,
+                options=options,
+                )
+
+    url = TEST_APP_ADDRESS
     driver.get(url)
     driver.maximize_window()
     yield driver
-    driver.close()
+    driver.quit()
 
 @pytest.fixture
 def page(driver):

@@ -23,7 +23,7 @@ def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_root.settings')
     os.environ.setdefault('PROJECT_DIR', str(PROJECT_DIR))
 
-    runserver.default_port = os.environ.get('PORT') or 8000
+    runserver.default_port = os.environ.get('APP_PORT') or 8000
 
     try:
         from django.core.management import execute_from_command_line

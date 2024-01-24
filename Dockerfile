@@ -13,8 +13,8 @@ FROM python:3 as stage-two
 ARG run_mode=''
 EXPOSE 80
 
-ENV PORT=80
-ENV GUNICORN_CMD_ARGS="--bind=0.0.0.0:${PORT} --workers=3"
+ENV APP_PORT=80
+ENV GUNICORN_CMD_ARGS="--bind=0.0.0.0:${APP_PORT} --workers=3"
 ENV RUN_MODE=$run_mode
 ENV PROJECT_DIR=/usr/src/app
 ENV LIBS_DIR=/usr/src/libs
