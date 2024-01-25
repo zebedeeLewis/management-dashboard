@@ -185,12 +185,14 @@ $ docker run -p 8080:80 --name="dashboard-i" -itd dashboard
 ```
 
 ## Test App Deployment
-The integration tests makes use of `behave` for feature tests and `pytest`
-for end-to-end tests. They also use `selenium` to automate browser testing.
-Developers can run tests locally from their machine using a local webdriver
-instance, or use docker compose to spin up a set of selenium grid containers.
-If the `WEBDRIVER_SERVER` environment variable is a non-empty string, the
-value will be used as the address of the remote webdriver. Otherwise, it is
+The integration tests makes use of `behave` for feature tests and
+[pytest](https://docs.pytest.org/en/7.4.x/contents.html) for end-to-end
+tests. They also use [selenium](https://selenium-python.readthedocs.io/index.html)
+tests. To to automate browser testing. Developers can run tests locally
+from their machine using a local webdriver instance, or use docker
+compose to spin up a set of selenium grid containers. If the
+`WEBDRIVER_SERVER` environment variable is a non-empty string, the value
+will be used as the address of the remote webdriver. Otherwise, it is
 assumed that a local driver is intended. **Note: make sure to set up a
 virtual environment to protect your system if using your development machine,
 instead of a docker image.**
@@ -267,47 +269,21 @@ After downloading the project repository, change into the project root
 directory and follow the steps below to run tests using selenium grid.
 
 1. Follow steps 1-4 above.
-2. create docker network `se-grid-net`.
+
+2. Deploy selenium grid
 ```sh
-docker network create --subnet 172.18.0.0/16 \
---gateway 172.18.0.1 se-grid-net
-```
-3. Run a selenium hub container with with ip `172.18.0.12`.
-```sh
-docker run -d -p 4442-4444:4442-4444 --name se-hub \
---net se-grid-net --ip 172.18.0.12 selenium/hub:latest
+docker compose -f docker-compose-se-grid.yml up -d
 ```
 
-4. Run one or more selenium nodes connected to the same network with
-the hub container created above configured as their hub.
-```sh
-docker run --shm-size="2g" -d --net se-grid-net --name se-chrome \
--e SE_EVENT_BUS_HOST=se-hub \
--e SE_EVENT_BUS_PUBLISH_PORT=4442 \
--e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
-selenium/node-chrome:latest
-
-docker run --shm-size="2g" -d --net se-grid-net --name se-firefox \
--e SE_EVENT_BUS_HOST=se-hub \
--e SE_EVENT_BUS_PUBLISH_PORT=4442 \
--e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
-selenium/node-firefox:latest
-
-docker run --shm-size="2g" -d --net se-grid-net --name se-edge \
--e SE_EVENT_BUS_HOST=se-hub \
--e SE_EVENT_BUS_PUBLISH_PORT=4442 \
--e SE_EVENT_BUS_SUBSCRIBE_PORT=4443 \
-selenium/node-edge:latest
-```
-
-5. Set `WEBDRIVER_SERVER` environment variable to enable selenium
-grid in tests using the selenium hub container created in step 3.
+3. Set `WEBDRIVER_SERVER` environment variable to enable selenium
+grid in tests using the selenium hub container created by the command
+in step 2.
 
 ```sh
-export WEBDRIVER_SERVER=172.18.0.12
+export WEBDRIVER_SERVER=localhost
 ```
 
-6. Run tests.
+4. Run tests.
 End-to-end tests:
 ```sh
 npx nx run e2e
