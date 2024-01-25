@@ -47,7 +47,7 @@
       "command": "pytest src/app/e2e"
     },
     "features":{
-      "command": "behave src/app/features"
+      "command": "pytest src/app/features"
     },
     "serve-fe": {
       "executor": "@nx/webpack:dev-server",
