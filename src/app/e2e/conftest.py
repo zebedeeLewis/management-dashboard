@@ -14,15 +14,20 @@ TEST_APP_ADDRESS = 'http://' + APP_SERVER + ':' + str(APP_PORT) + '/app'
 WEBDRIVER_SERVER = os.environ.get('WEBDRIVER_SERVER') or ''
 SELENIUM_HUB = 'http://' + WEBDRIVER_SERVER + ':4444/wd/hub'
 
-@pytest.fixture
-def driver():
+def driver_ids(param):
+    return param[0]
+
+@pytest.fixture(ids=driver_ids, params=[
+    ('chome', ChromeOptions()),
+    ('edge', FirefoxOptions()),
+    ('firefox', EdgeOptions()),
+    ])
+def driver(request):
 
     if WEBDRIVER_SERVER == '':
         driver = webdriver.Chrome()
     else:
-        # options = FirefoxOptions()
-        # options = EdgeOptions()
-        options = ChromeOptions()
+        options = request.param[1]
 
         options.add_argument('--ignore-ssl-errors=yes')
         options.add_argument('--ignore-certificate-errors')

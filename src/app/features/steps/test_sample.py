@@ -1,7 +1,7 @@
 import os
 
 from time import sleep
-from pytest_bdd import scenarios, given, when, then
+from pytest_bdd import scenario, given, when, then
 
 from integrations.pages.sample import SamplePage
 
@@ -9,7 +9,9 @@ APP_PORT = os.environ.get('APP_PORT') or 7000
 APP_SERVER = os.environ.get('APP_SERVER') or 'localhost'
 TEST_APP_ADDRESS = 'http://' + APP_SERVER + ':' + str(APP_PORT) + '/app'
 
-scenarios('../features/sample.feature')
+@scenario('../features/sample.feature', 'open a sample page')
+def test_scenario_impl(driver):
+    pass
 
 @given('we are on the sample page', target_fixture='on_sample_page')
 def step_impl(driver):
