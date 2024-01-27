@@ -69,32 +69,6 @@ django server can find them, make and run migrations, then spin up a
 development server. After some setup, the app can be viewed by visiting
 `127.0.0.1:8000/app`  and `127.0.0.1:8000/api`.
 
-##  Tests
-###  End-To-End
-The end-to-end tests are a set of
-[pytest](https://docs.pytest.org/en/7.4.x/contents.html)
-[selenium](https://selenium-python.readthedocs.io/index.html) tests. To
-setup, run and develop the end-to-end tests you must first setup a python
-development environment, install the dependencies, serve the application,
-then run the tests. Follow the instructions under "backend setup",  after
-switching into your virtual environment and installing the test
-dependencies you need to serve the application. The test application expects
-the app to be served at `localhost` on port `7000` by default. The expected
-app address can be changed by setting the `APP_SERVER` environment variable,
-and the port can be changed by setting `APP_PORT`.
-
-To run end-to-end tests, run the following command from the project root
-directory:
-```sh
-(management-dashboard)$ npx nx run e2e
-```
-
-To run feature tests, run the following command from the project root
-directory:
-```sh
-(management-dashboard)$ npx nx run features
-```
-
 ## App Deployment
 ### Environment
 In addition to the environment variables defined by the python system and
@@ -185,10 +159,10 @@ $ docker run -p 8080:80 --name="dashboard-i" -itd dashboard
 ```
 
 ## Test App Deployment
-The integration tests makes use of `behave` for feature tests and
-[pytest](https://docs.pytest.org/en/7.4.x/contents.html) for end-to-end
-tests. They also use [selenium](https://selenium-python.readthedocs.io/index.html)
-tests. To to automate browser testing. Developers can run tests locally
+The integration tests use 
+[pytest](https://docs.pytest.org/en/7.4.x/contents.html)
+and [selenium](https://selenium-python.readthedocs.io/index.html)
+tests to automate browser testing. Developers can run tests locally
 from their machine using a local webdriver instance, or use docker
 compose to spin up a set of selenium grid containers. If the
 `WEBDRIVER_SERVER` environment variable is a non-empty string, the value
